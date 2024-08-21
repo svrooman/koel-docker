@@ -60,8 +60,8 @@ RUN apt-get update \
     zip \
   && apt-get clean \
   # Create the music volume so it has the correct permissions
-  && mkdir /music \
-  && chown www-data:www-data /music \
+  && mkdir /vits-music \
+  && chown www-data:www-data /vits-music \
   # Create the search-indexes volume so it has the correct permissions
   && mkdir -p /var/www/html/storage/search-indexes \
   && chown www-data:www-data /var/www/html/storage/search-indexes \
@@ -88,10 +88,10 @@ RUN cp -R /tmp/koel/. /var/www/html \
 # This declaration must be AFTER creating the folders and setting their permissions
 # and AFTER changing to non-root user.
 # Otherwise, they are owned by root and the user cannot write to them.
-VOLUME ["/music", "/var/www/html/storage/search-indexes"]
+VOLUME ["/vits-music", "/var/www/html/storage/search-indexes"]
 
 ENV FFMPEG_PATH=/usr/bin/ffmpeg \
-    MEDIA_PATH=/music \
+    MEDIA_PATH=/vits-music \
     STREAMING_METHOD=x-sendfile \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en \
